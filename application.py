@@ -76,4 +76,5 @@ def deleteFeature(feature_id):
             return json.dumps({'html':'<span>Enter the required fields</span>'})
 
 if __name__ == "__main__":
+    application.debug = True
     application.run()
