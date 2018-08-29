@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+
+    <link href="../static/style.css" rel="stylesheet">
+
+    <title>Feature Request App</title>
+
+  </head>
+  <body>
+    <nav role="navigation" class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">Feature Request App</a>
+      <a class="ml-auto" href="/createRequest">Add New</a>
+    </nav>
+
+    <main role="main" class="container" id="featureList">
+      <div class="row">
+        <div class="col-12">
+          {% if features|length > 0 %}
+            <h3 class="py-4">Feature Submitted</h3>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Client</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Target Date</th>
+                  <th scope="col">Product Area</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for feature in features %}
+                  <tr>
+                    <td>{{ feature.title|e }}<br><small>{{ feature.description| e}}</small></td>
+                    <td>Client {{ feature.client|e }}</td>
+                    <td>{{ feature.priority|e }}</td>
+                    <td>{{ feature.target_date|e }}</td>
+                    <td>{{ feature.product_area|e }}</td>
+                    <td><a class="clickable-icon" data-bind="click: function(data, event) { deleteFeature({{feature.id}}, data, event) }"><i class="fas fa-trash-alt"></i></a></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <div class="py-4">No feature has been submitted yet. Head over to Add New to submit one.</div>
+          {% endif %}
+        </div>
+      </div>
+    </main>
+
+    
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='moment.min.js')}}"></script>
+    <script src="{{url_for('static', filename='index.js')}}"></script>
+  </body>
+</html>

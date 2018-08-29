@@ -23,16 +23,16 @@ def main():
     features = Feature.query.order_by('-id').all()
     return render_template('listFeatures.html', features=features)
 
-@application.route('/createFeature', methods=['GET', 'POST'])
-def createFeature():
+@application.route('/createRequest', methods=['GET', 'POST'])
+def createRequest():
     if request.method == 'POST':
-        # read the posted values from the UI
         title = request.form['title']
         description = request.form['description']
         client = request.form['client']
         priority = int(request.form['priority'])
         target = datetime.strptime(request.form['target'], '%Y-%m-%d')
-        print(target)
+        #target=request.form['target']
+        print(target+'hiiiiiiiiiiiii')
         area = request.form['area']
      
         # validate the received values
@@ -58,11 +58,12 @@ def createFeature():
                 features_to_update_count = Feature.query.filter_by(client=client, priority=priority_to_update).count()
 
             db.session.commit()
+            
             return json.dumps({'html':'<span>All good</span>'})
         else:
             return json.dumps({'html':'<span>Enter the required fields</span>'})
     elif request.method == 'GET':
-        return render_template('createFeature.html')
+        return render_template('createRequest.html')
 
 @application.route('/delete/<int:feature_id>', methods=['GET', 'DELETE'])
 def deleteFeature(feature_id):
@@ -76,5 +77,5 @@ def deleteFeature(feature_id):
             return json.dumps({'html':'<span>Enter the required fields</span>'})
 
 if __name__ == "__main__":
-    application.debug = True
+    #application.debug = True
     application.run()
