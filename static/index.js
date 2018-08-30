@@ -17,10 +17,8 @@ var featureModel = {
     ],
     selectedArea : ko.observable('policy'),
     create : function(formElement) {
-        print('reached function')
-    	// If the form data is valid, post the serialized form data to the web API.
+        // If the form data is valid, post the serialized form data to the web API.
         $(formElement).validate();
-        print($(formElement).valid())
         if ($(formElement).valid()) {
            
 	        if (moment(this.target()) < moment()) {

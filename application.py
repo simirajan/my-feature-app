@@ -32,7 +32,7 @@ def createRequest():
         priority = int(request.form['priority'])
         target = datetime.strptime(request.form['target'], '%Y-%m-%d')
         #target=request.form['target']
-        print(target+'hiiiiiiiiiiiii')
+        #print(target)
         area = request.form['area']
      
         # validate the received values
